@@ -7,8 +7,10 @@
 		<!-- TODO : Common API -->
 		<script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
 		<script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/TVKeyValue.js"></script>
+		<script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/webapi/1.0/webapis.js"></script>
 
 		<!-- TODO : Javascript code -->
+		<script src="https://www.youtube.com/iframe_api"></script>
 		<script language="javascript" type="text/javascript" src="app/javascript/Main.js"></script>
 
 		<!-- TODO : Style sheets code -->
@@ -26,8 +28,31 @@
 		<!-- TODO: your code here -->
 		<div id="player"></div>
 		<div class="ver">
-			bata 1
-			<h1 id="vol">50</h1>
+			bata 16
+			<h1 id="play_list"></h1>
+			<h2 id="vol"></h2>
+			<ul>
+				<li>
+					getPlayerState -
+					<span id="getPlayerState"></span>
+				</li>
+				<li>
+					getVideoBytesLoaded -
+					<span id="getVideoBytesLoaded"></span>
+				</li>
+				<li>
+					getPlaybackQuality -
+					<span id="getPlaybackQuality"></span>
+				</li>
+				<li>
+					getDuration -
+					<span id="getDuration"></span>
+				</li>
+				<li>
+					getPlaylist -
+					<span id="getPlaylist"></span>
+				</li>
+			</ul>
 		</div>
 	</body>
 </html>
