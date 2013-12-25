@@ -4,7 +4,7 @@ var tvKey = new Common.API.TVKeyValue();
 var Main =
 {
 	vol: 50,
-	playCount: 0,
+	// playCount: 0,
 	listCount: 1
 };
 
@@ -63,7 +63,7 @@ Main.onLoad = function()
     	            height: '720',
     	            videoId: videoList[0],
     	            playerVars: {
-	            		rel: 1,
+    	            	rel: 1,
     	                autoplay: 1,
     	                disablekb: 0,
     	                showsearch: 0,
@@ -88,7 +88,7 @@ Main.onLoad = function()
                     player.setLoop(true);
                     // player.playVideo();
     	        }
-    	        alert('player--' + player);
+    	        // alert('player--' + player);
     	        Main.player = player;
     	    }
 
@@ -104,18 +104,24 @@ Main.onLoad = function()
 				}
     	    	document.querySelector('#getPlayerState').innerHTML = player.getPlayerState();
                 document.querySelector('#getVideoBytesLoaded').innerHTML = player.getVideoBytesLoaded();
+				document.querySelector('#width').innerHTML = document.querySelector('#player').getAttribute('width');
+                document.querySelector('#height').innerHTML = document.querySelector('#player').getAttribute('height');
                 document.querySelector('#getPlaybackQuality').innerHTML = player.getPlaybackQuality();
                 document.querySelector('#getDuration').innerHTML = player.getDuration();
                 document.querySelector('#getPlaylist').innerHTML = player.getPlaylist();
     	        if (event.data === 0) {
-    	            alert('Next');
-    	            Main.playCount++;
-    	            if (Main.playCount > (videoList.length -1)) {
-    	                Main.playCount = 0;
-    	            }
-    	            player.loadVideoById(videoList[Main.playCount]);
-    	            player.playVideo();
+    	            // alert('Next');
+    	            // Main.playCount++;
+    	            // if (Main.playCount > (videoList.length -1)) {
+    	            //     Main.playCount = 0;
+    	            // }
+    	            // player.loadVideoById(videoList[Main.playCount]);
+    	            // player.playVideo();
     	        }
+    	        // if (event.data === -1) {
+    	        // 	alert('ERROR');
+    	        // 	player.nextVideo();
+    	        // }
     	    }
 
     	    function onYouTubeIframeAPIReady() {
@@ -197,9 +203,11 @@ Main.keyDown = function()
 			alert("ENTER");
 			if (Main.player.getPlayerState() === 2) {
                 Main.player.playVideo();
+                document.querySelector('#status').innerHTML = 'Play';
             }
             if (Main.player.getPlayerState() === 1) {
                 Main.player.pauseVideo();
+                document.querySelector('#status').innerHTML = 'Pause';
             }
 			break;
 		default:
