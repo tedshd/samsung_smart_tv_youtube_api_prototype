@@ -3,7 +3,6 @@ var tvKey = new Common.API.TVKeyValue();
 
 var Main =
 {
-	vol: 50,
 	// playCount: 0,
 	listCount: 1
 };
@@ -223,7 +222,9 @@ Main.keyDown = function()
 			break;
 		case 7:
 			alert('vol up');
-			alert(Main.vol);
+			if (Main.player.isMuted()) {
+                Main.player.unMute();
+            }
 			try {
 			    if (webapis.audiocontrol.setVolumeUp()) {
 			        console.log("Volume is up");
@@ -238,17 +239,12 @@ Main.keyDown = function()
 			} catch (error) {
 			    console.log(error.name);
 			}
-			// if (Main.player.isMuted()) {
-   //              Main.player.unMute();
-   //          }
-   //          if (100 > Main.vol) {
-			// 	Main.player.setVolume(Main.vol++);
-			// 	document.querySelector('#vol').innerHTML = Main.vol;
-   //          }
 			break;
 		case 11:
 			alert('vol down');
-			alert(Main.vol);
+			if (Main.player.isMuted()) {
+                Main.player.unMute();
+            }
 			try {
 			    if (webapis.audiocontrol.setVolumeDown()) {
 			        console.log("Volume is down");
@@ -263,13 +259,6 @@ Main.keyDown = function()
 			} catch (error) {
 			    console.log(error.name);
 			}
-			// if (Main.player.isMuted()) {
-   //              Main.player.unMute();
-   //          }
-   //          if (Main.vol > 0) {
-			// 	Main.player.setVolume(Main.vol--);
-			// 	document.querySelector('#vol').innerHTML = Main.vol;
-   //          }
 			break;
 		case 27:
 			if (Main.player.isMuted()) {
