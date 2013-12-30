@@ -111,11 +111,11 @@ Main.onLoad = function()
     	                disablekb: 0,
     	                showsearch: 0,
     	                showinfo: 0,
-    	                controls: 1,
+    	                controls: 0,
 						autohide: 0,
 						modestbranding: 0,
     	                wmode: 'opaque',
-    	                hd: 1,
+    	                // hd: 1,
     	                html5: 1,
     	                iv_load_policy: 3
     	            },
