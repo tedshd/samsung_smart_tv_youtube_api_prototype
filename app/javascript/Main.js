@@ -47,16 +47,16 @@ Main.onLoad = function()
 				// 'v_7': '9Y15es8OY0U',
 				// 'v_8': 'DDs5bXh4erM',
 				// 'v_9': 'LWV-f6dMN3Q'
-                'v_12': 'COZIk_dhSK4',
-                'v_17': '8wWuH7MIeCA',
-                'v_11': 'pWhXUuTX3co',
-                'v_13': 'QJjpWSwTagc',
-                'v_14': '-reqZIE_DSg',
-                'v_15': 'bbqY1P6KJmI',
-                'v_16': 'QfVpg0IQ8rk',
-				'v_10': '0lfDNu-k6oo',
-                'v_18': 'i3eSt6UFnVY',
-                'v_19': '7dtHVkm4i6o'
+                'v_12': '9COe8DCV0O8',
+                'v_17': 'zebShorVev4',
+                'v_11': 'zMpuwAbQcM4',
+                'v_13': '2_BSVWMiojU',
+                'v_14': 'EcsoYwO83aw',
+                'v_15': 'SquQpiztDME',
+                'v_16': 'Qb57Ddj8VRA',
+				'v_10': 'tIfjrmkxvYw',
+                'v_18': 'Ef2Hfc1Ya9w',
+                'v_19': 'Ug3Y3eesePA'
     	    };
 
     	    // videoList array
@@ -241,13 +241,6 @@ Main.keyDown = function()
 		case tvKey.KEY_LEFT:
 			alert("LEFT");
 			Main.switchVideo(0);
-			// Main.playCount--;
-   //          if (Main.playCount < 0) {
-   //              Main.playCount = Main.videoList.length -1;
-   //          }
-   //          Main.player.loadVideoById(Main.videoList[Main.playCount]);
-   //          Main.player.playVideo();
-			// Main.player.previousVideo();
 			if (Main.listCount === 1) {
 				Main.listCount = Main.videoList.length;
 			} else {
@@ -258,13 +251,6 @@ Main.keyDown = function()
 		case tvKey.KEY_RIGHT:
 			alert("RIGHT");
 			Main.switchVideo(1);
-			// Main.playCount++;
-   //          if (Main.playCount > (Main.videoList.length -1)) {
-   //              Main.playCount = 0;
-   //          }
-   //          Main.player.loadVideoById(Main.videoList[Main.playCount]);
-   //          Main.player.playVideo();
-			// Main.player.nextVideo();
 			if (Main.listCount === Main.videoList.length) {
 				Main.listCount = 1;
 			} else {
