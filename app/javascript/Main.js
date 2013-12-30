@@ -3,7 +3,9 @@ var tvKey = new Common.API.TVKeyValue();
 
 var Main =
 {
+	videoList: [],
 	playCount: 0,
+	channelCount: 0,
 	listCount: 1
 };
 var skipContinue;
@@ -32,11 +34,36 @@ Main.onLoad = function()
 
 	    	var videoList = [],
 		        // playCount = 0,
+		        channelList = [],
 		        player,
 		        playLoop,
 		        switchVideo;
 
-	    	var video_ID = {
+		    var channel_01 = [
+					'V8BTsiMxyaQ',
+					'ASO_zypdnsQ',
+					'7wvNwOPprBE',
+					'mTSuiGubCHE',
+					'n-BXNXvTvV4',
+					'CRJDQQXS4uE',
+					'IZkYdqRWKaY',
+					'9Y15es8OY0U',
+					'DDs5bXh4erM',
+					'LWV-f6dMN3Q'
+		    	],
+		    	channel_02 = [
+					'9COe8DCV0O8',
+					'zebShorVev4',
+					'zMpuwAbQcM4',
+					'2_BSVWMiojU',
+					'EcsoYwO83aw',
+					'SquQpiztDME',
+					'Qb57Ddj8VRA',
+					'tIfjrmkxvYw',
+					'Ef2Hfc1Ya9w',
+					'Ug3Y3eesePA'
+		    	];
+	    	// var video_ID = {
 				// 'v_2': 'V8BTsiMxyaQ',
 				// 'v_5': 'ASO_zypdnsQ',
 				// 'v_0': '7wvNwOPprBE',
@@ -47,25 +74,28 @@ Main.onLoad = function()
 				// 'v_7': '9Y15es8OY0U',
 				// 'v_8': 'DDs5bXh4erM',
 				// 'v_9': 'LWV-f6dMN3Q'
-                'v_12': '9COe8DCV0O8',
-                'v_17': 'zebShorVev4',
-                'v_11': 'zMpuwAbQcM4',
-                'v_13': '2_BSVWMiojU',
-                'v_14': 'EcsoYwO83aw',
-                'v_15': 'SquQpiztDME',
-                'v_16': 'Qb57Ddj8VRA',
-				'v_10': 'tIfjrmkxvYw',
-                'v_18': 'Ef2Hfc1Ya9w',
-                'v_19': 'Ug3Y3eesePA'
-    	    };
+    //             'v_12': '9COe8DCV0O8',
+    //             'v_17': 'zebShorVev4',
+    //             'v_11': 'zMpuwAbQcM4',
+    //             'v_13': '2_BSVWMiojU',
+    //             'v_14': 'EcsoYwO83aw',
+    //             'v_15': 'SquQpiztDME',
+    //             'v_16': 'Qb57Ddj8VRA',
+				// 'v_10': 'tIfjrmkxvYw',
+    //             'v_18': 'Ef2Hfc1Ya9w',
+    //             'v_19': 'Ug3Y3eesePA'
+    // 	    };
+    	    channelList = [channel_01, channel_02];
 
     	    // videoList array
-    	    for(var key in video_ID) {
-    	        var value = video_ID[key];
-    	        videoList.push(value);
-    	    }
-    	    Main.videoList = videoList;
+    	    // for(var key in video_ID) {
+    	    //     var value = video_ID[key];
+    	    //     videoList.push(value);
+    	    // }
+    	    // Main.videoList = videoList;
+    	    Main.videoList = channelList[0];
     	    document.querySelector('#play_list').innerHTML = Main.listCount;
+    	    document.querySelector('#channel').innerHTML = 'Channel-0' + Main.channelCount;
     	    // channelList[0] = videoList;
 
     	    function playChannel() {
@@ -74,7 +104,7 @@ Main.onLoad = function()
     	        player = new YT.Player('player', {
     	        	width: '1280',
     	            height: '720',
-    	            videoId: videoList[0],
+    	            videoId: Main.videoList[0],
     	            playerVars: {
     	            	rel: 1,
     	                autoplay: 1,
@@ -108,21 +138,26 @@ Main.onLoad = function()
 
     	    // play list loop
     	    function playLoop() {
-    	    	setTimeout(
-					function() {
-						if (player.getDuration() === 0) {
-							playLoop();
-						}
-					},
-					3000
-				);
+    // 	    	setTimeout(
+				// 	function() {
+				// 		if (player.getDuration() === 0) {
+				// 			playLoop();
+				// 		}
+				// 	},
+				// 	3000
+				// );
 	            Main.playCount++;
-	            if (Main.playCount > (videoList.length -1)) {
+	            if (Main.playCount > (Main.videoList.length -1)) {
 	                Main.playCount = 0;
 	            }
-	            player.loadVideoById(videoList[Main.playCount]);
+	            player.loadVideoById(Main.videoList[Main.playCount]);
 	            player.playVideo();
 				Main.listCount++;
+				if (Main.listCount === Main.videoList.length) {
+					Main.listCount = 1;
+				} else {
+					Main.listCount++;
+				}
 				document.querySelector('#play_list').innerHTML = Main.listCount;
     	    }
 
@@ -197,19 +232,56 @@ Main.onLoad = function()
                     function () {
                         player.loadVideoById(Main.videoList[Main.playCount]);
                         player.playVideo();
-                        setTimeout(
-							function() {
-								if (player.getDuration() === 0) {
-									playLoop();
-								}
-							},
-							1000
-						);
+      //                   setTimeout(
+						// 	function() {
+						// 		if (player.getDuration() === 0) {
+						// 			playLoop();
+						// 		}
+						// 	},
+						// 	1000
+						// );
                     },
                     900
                 );
             }
             Main.switchVideo = switchVideo;
+
+            function switchChannel(switching) {
+                clearTimeout(skipContinue);
+                switch(switching) {
+                    case 0:
+                    Main.channelCount--;
+                    if (Main.channelCount < 0) {
+                        Main.channelCount = channelList.length -1;
+                    }
+                    break;
+                    case 1:
+                    Main.channelCount++;
+                    if (Main.channelCount > (channelList.length -1)) {
+                        Main.channelCount = 0;
+                    }
+                    break;
+                }
+                skipContinue = setTimeout(
+                    function () {
+                    	document.querySelector('#channel').innerHTML = 'Channel-0' + Main.channelCount;
+                    	Main.videoList = [];
+                        Main.videoList = channelList[Main.channelCount];
+                        player.loadVideoById(Main.videoList[0]);
+                        player.playVideo();
+      //                   setTimeout(
+						// 	function() {
+						// 		if (player.getDuration() === 0) {
+						// 			playLoop();
+						// 		}
+						// 	},
+						// 	1000
+						// );
+                    },
+                    900
+                );
+            }
+            Main.switchChannel = switchChannel;
 		}
 	}
 
@@ -245,8 +317,8 @@ Main.keyDown = function()
 				Main.listCount = Main.videoList.length;
 			} else {
 				Main.listCount--;
-				document.querySelector('#play_list').innerHTML = Main.listCount;
 			}
+			document.querySelector('#play_list').innerHTML = Main.listCount;
 			break;
 		case tvKey.KEY_RIGHT:
 			alert("RIGHT");
@@ -255,8 +327,8 @@ Main.keyDown = function()
 				Main.listCount = 1;
 			} else {
 				Main.listCount++;
-				document.querySelector('#play_list').innerHTML = Main.listCount;
 			}
+			document.querySelector('#play_list').innerHTML = Main.listCount;
 			break;
 		case tvKey.KEY_UP:
 			alert("UP");
@@ -338,9 +410,11 @@ Main.keyDown = function()
 			break;
 		case 65:
 			alert('channel down');
+			Main.switchChannel(0);
 			break;
 		case 68:
 			alert('channel up');
+			Main.switchChannel(0);
 			break;
 	}
 };
