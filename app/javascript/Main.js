@@ -37,16 +37,26 @@ Main.onLoad = function()
 		        switchVideo;
 
 	    	var video_ID = {
-				'v_2': 'V8BTsiMxyaQ',
-				'v_5': 'ASO_zypdnsQ',
-				'v_0': '7wvNwOPprBE',
-    			'v_1': 'mTSuiGubCHE',
-				'v_3': 'n-BXNXvTvV4',
-				'v_4': 'CRJDQQXS4uE',
-				'v_6': 'IZkYdqRWKaY',
-				'v_7': '9Y15es8OY0U',
-				'v_8': 'DDs5bXh4erM',
-				'v_9': 'LWV-f6dMN3Q'
+				// 'v_2': 'V8BTsiMxyaQ',
+				// 'v_5': 'ASO_zypdnsQ',
+				// 'v_0': '7wvNwOPprBE',
+				// 'v_1': 'mTSuiGubCHE',
+				// 'v_3': 'n-BXNXvTvV4',
+				// 'v_4': 'CRJDQQXS4uE',
+				// 'v_6': 'IZkYdqRWKaY',
+				// 'v_7': '9Y15es8OY0U',
+				// 'v_8': 'DDs5bXh4erM',
+				// 'v_9': 'LWV-f6dMN3Q'
+                'v_12': 'COZIk_dhSK4',
+                'v_17': '8wWuH7MIeCA',
+                'v_11': 'pWhXUuTX3co',
+                'v_13': 'QJjpWSwTagc',
+                'v_14': '-reqZIE_DSg',
+                'v_15': 'bbqY1P6KJmI',
+                'v_16': 'QfVpg0IQ8rk',
+				'v_10': '0lfDNu-k6oo',
+                'v_18': 'i3eSt6UFnVY',
+                'v_19': '7dtHVkm4i6o'
     	    };
 
     	    // videoList array
@@ -104,7 +114,7 @@ Main.onLoad = function()
 							playLoop();
 						}
 					},
-					1000
+					3000
 				);
 	            Main.playCount++;
 	            if (Main.playCount > (videoList.length -1)) {
@@ -112,6 +122,8 @@ Main.onLoad = function()
 	            }
 	            player.loadVideoById(videoList[Main.playCount]);
 	            player.playVideo();
+				Main.listCount++;
+				document.querySelector('#play_list').innerHTML = Main.listCount;
     	    }
 
     	    function onPlayerStateChange(event) {
@@ -129,10 +141,13 @@ Main.onLoad = function()
                 document.querySelector('#height').innerHTML = document.querySelector('#player').getAttribute('height');
                 document.querySelector('#getPlaybackQuality').innerHTML = player.getPlaybackQuality();
                 document.querySelector('#getDuration').innerHTML = player.getDuration();
-                document.querySelector('#getPlaylist').innerHTML = player.getPlaylist();
+                // document.querySelector('#getPlaylist').innerHTML = player.getPlaylist();
                 document.querySelector('#getCurrentTime').innerHTML = player.getCurrentTime();
 
                 clearInterval(currentTime);
+                // if (player.getPlaybackQuality() !== 'hd1080') {
+                //     player.setPlaybackQuality('highres');
+                // }
     	        if (event.data === 0) {
     	            // alert('Next');
     	            playLoop();
@@ -147,10 +162,10 @@ Main.onLoad = function()
                         900
                     );
                 }
-    	        // if (event.data === -1) {
-    	        // 	alert('ERROR');
-    	        // 	player.nextVideo();
-    	        // }
+    	        if (event.data === -1) {
+    	        	// alert('ERROR');
+    	        	// playLoop();
+    	        }
     	    }
 
     	    function onYouTubeIframeAPIReady() {
@@ -182,6 +197,14 @@ Main.onLoad = function()
                     function () {
                         player.loadVideoById(Main.videoList[Main.playCount]);
                         player.playVideo();
+                        setTimeout(
+							function() {
+								if (player.getDuration() === 0) {
+									playLoop();
+								}
+							},
+							1000
+						);
                     },
                     900
                 );
@@ -326,6 +349,12 @@ Main.keyDown = function()
 				alert('Mute');
 				Main.player.mute();
             }
+			break;
+		case 65:
+			alert('channel down');
+			break;
+		case 68:
+			alert('channel up');
 			break;
 	}
 };
